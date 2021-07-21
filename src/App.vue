@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <h1>Cruel Board</h1>
+    <h2>Cruel Board</h2>
     <CruelBoardTable style="height: 90%"/>
   </div>
 </template>

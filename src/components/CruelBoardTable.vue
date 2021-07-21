@@ -1,16 +1,15 @@
 <template>
   <div class="hello">
-    <button v-on:click="loadMore(5)">Load 5 More</button>
+    <button v-on:click="loadMore(5)">Load 5 More Contests</button>
+    <button v-on:click="loadMore(-1)">Load All Contests</button>
     <el-table
         :data="boardData"
         style="width: 100%"
         stripe
-        height="100%"
         :default-sort = "{prop: 'cruelScore', order: 'ascending'}"
         :key="refresh"
     >
       <el-table-column
-          fixed
           type="index">
       </el-table-column>
       <el-table-column
@@ -19,30 +18,26 @@
           v-if="false">
       </el-table-column>
       <el-table-column
-          fixed
           label="Participants"
-          width="160"
+          width="120"
           align="center">
         <template v-slot="scope">
           <a :href="scope.row.lcLink">{{ `${scope.row.lcId}` }}</a>
         </template>
       </el-table-column>
       <el-table-column
-          fixed
           prop="days"
           label="days"
           width="80"
           sortable>
       </el-table-column>
       <el-table-column
-          fixed
           prop="lcRating"
           label="Rating"
           width="100"
           sortable>
       </el-table-column>
       <el-table-column
-          fixed
           prop="cruelScore"
           label="Score"
           width="100"
@@ -80,7 +75,7 @@ export default {
   },
   methods: {
     loadMore(k) {
-      for (let i=this.contestsShown.length; k>0 && i<this.contests.length; ++i, --k) {
+      for (let i=this.contestsShown.length; k!==0 && i<this.contests.length; ++i, --k) {
         this.contestsShown.push(this.contests[i]);
       }
       this.refresh ^= 1;
