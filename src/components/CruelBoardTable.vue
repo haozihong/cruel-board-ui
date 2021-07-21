@@ -1,7 +1,19 @@
 <template>
   <div class="hello">
-    <el-button size="small" v-on:click="loadMore(5)">Load 5 More Contests</el-button>
-    <el-button size="small" v-on:click="loadMore(-1)">Load All Contests</el-button>
+    <!--<div style="text-align: center">-->
+    <!--  <el-button size="small" v-on:click="loadMore(5)">Load 5 More Contests</el-button>-->
+    <!--  <el-button size="small" v-on:click="loadMore(-1)">Load All Contests</el-button>-->
+    <!--</div>-->
+    <div style="padding-left: 1.5rem; padding-right: 1.5rem; display: flex; align-items: center">
+      <span>Showing {{ contestsShowingNum }} Contests: </span>
+      <el-slider
+          :min="1"
+          :max="contests.length > 0 ? contests.length : 60"
+          v-model="contestsShowingNum"
+          style="width: 80%; margin-left: 1rem"
+          @change="contestsShowingNumChange">
+      </el-slider>
+    </div>
     <el-table
         :data="qunyouData"
         style="width: 100%"
@@ -58,7 +70,7 @@
           align="center"
           v-for="c in this.contestsShown" :key="c.id"
           :prop="`contest${c.contestIndex}Ranking`"
-          :label="c.contestIndex + ''"
+          :label="`${c.contestIndex} (${c.participantNum})`"
           sortable
           width="100">
         <template v-slot="scope">
@@ -81,14 +93,19 @@ export default {
       refresh: 0,
       contests: [],
       contestsShown: [],
+      contestsShowingNum: 5,
       qunyouData: []
     }
   },
   methods: {
-    loadMore(k) {
-      for (let i=this.contestsShown.length; k!==0 && i<this.contests.length; ++i, --k) {
-        this.contestsShown.push(this.contests[i]);
-      }
+    // loadMore(k) {
+    //   for (let i=this.contestsShown.length; k!==0 && i<this.contests.length; ++i, --k) {
+    //     this.contestsShown.push(this.contests[i]);
+    //   }
+    //   this.refresh ^= 1;
+    // },
+    contestsShowingNumChange() {
+      this.contestsShown = this.contests.slice(0, this.contestsShowingNum);
       this.refresh ^= 1;
     }
   },
@@ -147,7 +164,7 @@ export default {
       // console.log(this.qunyouData[0]);
 
       // show 5 contests initially
-      this.contestsShown = this.contests.slice(0, 5);
+      this.contestsShown = this.contests.slice(0, this.contestsShowingNum);
     });
   }
 }
