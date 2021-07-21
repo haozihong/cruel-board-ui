@@ -24,7 +24,7 @@ import {
   // Select,
   // Option,
   // OptionGroup,
-  // Button,
+  Button,
   // ButtonGroup,
   Table,
   TableColumn,
@@ -68,7 +68,7 @@ import {
   // Footer,
   // Timeline,
   // TimelineItem,
-  // Link,
+  Link,
   // Divider,
   // Image,
   // Calendar,
@@ -107,7 +107,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 // Vue.use(Select);
 // Vue.use(Option);
 // Vue.use(OptionGroup);
-// Vue.use(Button);
+Vue.use(Button);
 // Vue.use(ButtonGroup);
 Vue.use(Table);
 Vue.use(TableColumn);
@@ -151,7 +151,7 @@ Vue.use(TableColumn);
 // Vue.use(Footer);
 // Vue.use(Timeline);
 // Vue.use(TimelineItem);
-// Vue.use(Link);
+Vue.use(Link);
 // Vue.use(Divider);
 // Vue.use(Image);
 // Vue.use(Calendar);

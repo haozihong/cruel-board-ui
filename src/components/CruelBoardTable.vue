@@ -1,11 +1,12 @@
 <template>
   <div class="hello">
-    <button v-on:click="loadMore(5)">Load 5 More Contests</button>
-    <button v-on:click="loadMore(-1)">Load All Contests</button>
+    <el-button size="small" v-on:click="loadMore(5)">Load 5 More Contests</el-button>
+    <el-button size="small" v-on:click="loadMore(-1)">Load All Contests</el-button>
     <el-table
         :data="boardData"
         style="width: 100%"
         stripe
+        height="calc(100% - 32px)"
         :default-sort = "{prop: 'cruelScore', order: 'ascending'}"
         :key="refresh"
     >

@@ -1,7 +1,12 @@
 <template>
   <div id="app">
-    <h2>Cruel Board</h2>
-    <CruelBoardTable style="height: 90%"/>
+    <el-link href="https://wisdompeak.github.io/lc-score-board/" :underline="false" style="height: 75px">
+      <div style="display: flex; justify-content: center; align-items: center">
+        <img src="./assets/YouXiuLogo.png" alt="logo" style="height: 40px; padding-right: 0.75rem">
+        <h1>残酷刷题群</h1>
+      </div>
+    </el-link>
+  <CruelBoardTable style="height: calc(100% - 75px)"/>
   </div>
 </template>
 
@@ -23,7 +28,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
   height: 100%;
 }
 </style>
