@@ -7,7 +7,7 @@
     <div style="padding-left: 1.5rem; padding-right: 1.5rem; display: flex; align-items: center">
       <span>Showing {{ contestsShowingNum }} Contests: </span>
       <el-slider
-          :min="1"
+          :min="0"
           :max="contests.length > 0 ? contests.length : 60"
           v-model="contestsShowingNum"
           style="width: 80%; margin-left: 1rem"
@@ -75,7 +75,9 @@
           width="100">
         <template v-slot="scope">
           <div :style="`background: #${scope.row[`contest${c.contestIndex}RankingClr`]}; color: black`">
-            {{ `${scope.row[`contest${c.contestIndex}Ranking`]} | ${scope.row[`contest${c.contestIndex}Score`]}` }}
+            {{ scope.row[`contest${c.contestIndex}Ranking`] === Infinity ?
+              "N/A" :
+              `${scope.row[`contest${c.contestIndex}Ranking`]} | ${scope.row[`contest${c.contestIndex}Score`]}` }}
           </div>
         </template>
       </el-table-column>
