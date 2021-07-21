@@ -19,7 +19,7 @@
           v-if="false">
       </el-table-column>
       <el-table-column
-          label="Participants"
+          label="LC ID"
           width="120"
           align="center">
         <template v-slot="scope">
@@ -67,7 +67,6 @@
           </div>
         </template>
       </el-table-column>
-
     </el-table>
   </div>
 </template>
