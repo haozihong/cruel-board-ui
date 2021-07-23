@@ -13,6 +13,7 @@
     "element-ui": "^2.15.3",
     "vue": "^2.6.11",
     "vue-axios": "^3.2.4",
+    "vue-gtag": "^1.16.1",
     "xlsx": "^0.17.0"
   },
   "devDependencies": {

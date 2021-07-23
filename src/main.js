@@ -175,6 +175,11 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 Vue.use(VueAxios, axios)
 
+import VueGtag from "vue-gtag";
+Vue.use(VueGtag, {
+  config: { id: "G-E2QRC2LZ7M" }
+});
+
 Vue.config.productionTip = false
 
 new Vue({
