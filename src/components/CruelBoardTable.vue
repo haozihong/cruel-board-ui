@@ -1,35 +1,27 @@
 <template>
-  <div class="hello">
-    <!--<div style="text-align: center">-->
-    <!--  <el-button size="small" v-on:click="loadMore(5)">Load 5 More Contests</el-button>-->
-    <!--  <el-button size="small" v-on:click="loadMore(-1)">Load All Contests</el-button>-->
-    <!--</div>-->
-    <div style="padding-left: 1.5rem; padding-right: 1.5rem; display: flex; align-items: center">
-      <span>Showing {{ contestsShowingNum }} Contests: </span>
-      <el-slider
-          :min="0"
-          :max="contests.length > 0 ? contests.length : 60"
-          v-model="contestsShowingNum"
-          style="width: 80%; margin-left: 1rem"
-          @change="contestsShowingNumChange">
-      </el-slider>
+  <div>
+    <div style="height: 20px">
+      <el-checkbox label="Cruel Ranking" size="mini" v-model="cruelRankingColVisible" @change="refreshTable"></el-checkbox>
+      <el-checkbox label="Days" size="mini" v-model="daysColVisible" @change="refreshTable"></el-checkbox>
+      <el-checkbox label="Rating" size="mini" v-model="ratingColVisible" @change="refreshTable"></el-checkbox>
+      <el-checkbox label="All Contests" size="mini" v-model="allContestsVisible" @change="refreshTable"></el-checkbox>
     </div>
     <el-table
         id="boardTable"
         :data="qunyouData"
         style="width: 100%"
         stripe
-        height="calc(100% - 32px)"
+        height="calc(100% - 20px)"
         :default-sort = "{prop: 'cruelScore', order: 'ascending'}"
-        :key="refresh"
-    >
+        :key="refresh">
       <el-table-column
           type="index">
       </el-table-column>
       <el-table-column
           prop="cruelRanking"
-          label="Cruel Ranking"
-          v-if="false">
+          label="Ranking"
+          width="80"
+          v-if="cruelRankingColVisible">
       </el-table-column>
       <el-table-column
           label="LC ID"
@@ -44,14 +36,16 @@
           prop="days"
           label="Days"
           width="80"
-          sortable>
+          sortable
+          v-if="daysColVisible">
       </el-table-column>
       <el-table-column
           align="center"
           prop="lcRating"
           label="Rating"
           width="100"
-          sortable>
+          sortable
+          v-if="ratingColVisible">
         <template v-slot="scope">
           <span :style="`color: #${scope.row.lcRating >= 2100 ? 'A30000' : '0426A4'}`">
             {{ scope.row.lcRating }}
@@ -93,6 +87,10 @@ export default {
   name: 'CruelBoardTable',
   data() {
     return {
+      daysColVisible: true,
+      ratingColVisible: true,
+      cruelRankingColVisible: false,
+      allContestsVisible: false,
       refresh: 0,
       contests: [],
       qunyouData: []
