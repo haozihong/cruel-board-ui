@@ -158,7 +158,7 @@ export default {
               rankingClr = ws[XLSX.utils.encode_cell({r: i, c: 5+j*2})].s.fgColor?.rgb ?? 'EAEAEA',
               score = ws[XLSX.utils.encode_cell({r: i, c: 6+j*2})].v;
           if (ranking < 0) ranking = Infinity;
-          // person[`contest${this.contests[j].contestIndex}Ranking`] = ranking;
+          person[`contest${this.contests[j].contestIndex}Ranking`] = ranking;
           // person[`contest${this.contests[j].contestIndex}RankingClr`] = rankingClr;
           // person[`contest${this.contests[j].contestIndex}Score`] = score;
           person.contestRankings.push({
