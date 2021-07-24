@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div style="height: 20px">
+    <div style="height: 1.8rem">
       <el-checkbox label="残酷排名" size="mini" v-model="cruelRankingColVisible"></el-checkbox>
       <el-checkbox label="Days" size="mini" v-model="daysColVisible"></el-checkbox>
       <el-checkbox label="工号" size="mini" v-model="workNumColVisible"></el-checkbox>
@@ -11,10 +11,13 @@
         id="boardTable"
         :data="qunyouData"
         style="width: 100%"
+        :row-style="{height: '30px'}"
+        :cell-style="{padding: '0'}"
+        :header-row-style="{height: '40px'}"
+        :header-cell-style="{padding: '0px'}"
         stripe
-        height="calc(100% - 20px)"
-        :default-sort = "{prop: 'cruelScore', order: 'ascending'}"
-        :key="refresh">
+        height="calc(100% - 1.8rem)"
+        :default-sort = "{prop: 'cruelScore', order: 'ascending'}">
       <el-table-column
           type="index">
       </el-table-column>
@@ -79,6 +82,12 @@
           :label="`${contests[ci-1].contestIndex} (${contests[ci-1].participantNum})`"
           sortable
           width="100">
+        <template slot="header">
+          <span style="display: inline-block">
+            <div style="font-size: 13px; line-height: 1.3">{{ contests[ci-1].contestIndex }}场</div>
+            <div style="font-size: 11px; line-height: 1.1">{{ contests[ci-1].participantNum }}人</div>
+          </span>
+        </template>
         <template v-slot="scope">
           <div :style="`background: #${scope.row.contestRankings[ci-1].rankingClr}; color: black`">
             {{ scope.row.contestRankings[ci-1].ranking === Infinity ?
@@ -103,7 +112,6 @@ export default {
       ratingColVisible: true,
       cruelRankingColVisible: false,
       allContestsVisible: false,
-      refresh: 0,
       contests: [],
       qunyouData: []
     }
@@ -190,9 +198,9 @@ a {
 
 /* element-ui's bug */
 #boardTable >>> .el-table__header-wrapper {
-  height: 82px;
+  height: 40px;
 }
 #boardTable >>> .el-table__body-wrapper {
-  height: calc(100% - 82px) !important;
+  height: calc(100% - 40px) !important;
 }
 </style>
