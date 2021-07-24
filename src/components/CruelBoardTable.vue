@@ -26,8 +26,10 @@
           prop="cruelRanking"
           label="残酷排名"
           width="48"
-          sortable
           v-if="cruelRankingColVisible">
+        <template slot="header">
+          <div style="font-size: 13px; line-height: 1.3">残酷排名</div>
+        </template>
       </el-table-column>
       <el-table-column
           label="LC ID"
