@@ -1,10 +1,11 @@
 <template>
   <div>
     <div style="height: 20px">
-      <el-checkbox label="Cruel Ranking" size="mini" v-model="cruelRankingColVisible" @change="refreshTable"></el-checkbox>
-      <el-checkbox label="Days" size="mini" v-model="daysColVisible" @change="refreshTable"></el-checkbox>
-      <el-checkbox label="Rating" size="mini" v-model="ratingColVisible" @change="refreshTable"></el-checkbox>
-      <el-checkbox label="All Contests" size="mini" v-model="allContestsVisible" @change="refreshTable"></el-checkbox>
+      <el-checkbox label="残酷排名" size="mini" v-model="cruelRankingColVisible"></el-checkbox>
+      <el-checkbox label="Days" size="mini" v-model="daysColVisible"></el-checkbox>
+      <el-checkbox label="工号" size="mini" v-model="workNumColVisible"></el-checkbox>
+      <el-checkbox label="LC Rating" size="mini" v-model="ratingColVisible"></el-checkbox>
+      <el-checkbox label="All Contests" size="mini" v-model="allContestsVisible"></el-checkbox>
     </div>
     <el-table
         id="boardTable"
@@ -18,9 +19,11 @@
           type="index">
       </el-table-column>
       <el-table-column
+          align="center"
           prop="cruelRanking"
-          label="Ranking"
-          width="80"
+          label="残酷排名"
+          width="48"
+          sortable
           v-if="cruelRankingColVisible">
       </el-table-column>
       <el-table-column
@@ -38,6 +41,14 @@
           width="80"
           sortable
           v-if="daysColVisible">
+      </el-table-column>
+      <el-table-column
+          align="center"
+          prop="workNum"
+          label="工号"
+          width="80"
+          sortable
+          v-if="workNumColVisible">
       </el-table-column>
       <el-table-column
           align="center"
@@ -88,6 +99,7 @@ export default {
   data() {
     return {
       daysColVisible: true,
+      workNumColVisible: false,
       ratingColVisible: true,
       cruelRankingColVisible: false,
       allContestsVisible: false,
@@ -128,16 +140,19 @@ export default {
       }
 
       // read each qunyou
+      let allDays = [];
       for (let i = firstEntryRow; ws[`A${i+1}`] !== undefined; ++i) {
         let person = {
           cruelRanking: ws[`A${i+1}`].v,
           lcId: ws[`B${i+1}`].v,
           lcLink: ws[`B${i+1}`].l.Rel.Target,
           days: ws[`C${i+1}`].v,
+          workNum: 0,
           lcRating: ws[`D${i+1}`].v,
           cruelScore: ws[`E${i+1}`].v,
           contestRankings: []
         };
+        allDays.push(person.days);
         for (let j=0; j<this.contests.length; ++j) {
           let ranking = ws[XLSX.utils.encode_cell({r: i, c: 5+j*2})].v,
               rankingClr = ws[XLSX.utils.encode_cell({r: i, c: 5+j*2})].s.fgColor?.rgb ?? 'EAEAEA',
@@ -155,7 +170,13 @@ export default {
         this.qunyouData.push(person);
         // if (i > 25) break;
       }
-      // console.log(this.qunyouData[0]);
+
+      // calculate work number
+      allDays.sort((a, b) => b - a);
+      let daysToIdx = {};
+      for (let i=0; i<allDays.length; ++i)
+        if (!(allDays[i] in daysToIdx)) daysToIdx[allDays[i]] = i + 1;
+      this.qunyouData.forEach(person => person.workNum = daysToIdx[person.days]);
     });
   }
 }
