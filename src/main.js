@@ -3,7 +3,7 @@ import App from './App.vue'
 
 import {
   // Pagination,
-  // Dialog,
+  Dialog,
   // Autocomplete,
   // Dropdown,
   // DropdownMenu,
@@ -25,7 +25,7 @@ import {
   // Option,
   // OptionGroup,
   Button,
-  // ButtonGroup,
+  ButtonGroup,
   Table,
   TableColumn,
   // DatePicker,
@@ -33,8 +33,8 @@ import {
   // TimePicker,
   // Popover,
   // Tooltip,
-  // Breadcrumb,
-  // BreadcrumbItem,
+  Breadcrumb,
+  BreadcrumbItem,
   // Form,
   // FormItem,
   // Tabs,
@@ -44,8 +44,8 @@ import {
   // Alert,
   Slider,
   // Icon,
-  // Row,
-  // Col,
+  Row,
+  Col,
   // Upload,
   // Progress,
   // Spinner,
@@ -61,16 +61,16 @@ import {
   // Cascader,
   // ColorPicker,
   // Transfer,
-  // Container,
-  // Header,
-  // Aside,
-  // Main,
-  // Footer,
+  Container,
+  Header,
+  Aside,
+  Main,
+  Footer,
   // Timeline,
   // TimelineItem,
   Link,
-  // Divider,
-  // Image,
+  Divider,
+  Image,
   // Calendar,
   // Backtop,
   // PageHeader,
@@ -83,10 +83,10 @@ import {
   // Notification
 } from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css'
-// import 'element-ui/lib/theme-chalk/display.css'
+import 'element-ui/lib/theme-chalk/display.css'
 
 // Vue.use(Pagination);
-// Vue.use(Dialog);
+Vue.use(Dialog);
 // Vue.use(Autocomplete);
 // Vue.use(Dropdown);
 // Vue.use(DropdownMenu);
@@ -108,7 +108,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 // Vue.use(Option);
 // Vue.use(OptionGroup);
 Vue.use(Button);
-// Vue.use(ButtonGroup);
+Vue.use(ButtonGroup);
 Vue.use(Table);
 Vue.use(TableColumn);
 // Vue.use(DatePicker);
@@ -116,8 +116,8 @@ Vue.use(TableColumn);
 // Vue.use(TimePicker);
 // Vue.use(Popover);
 // Vue.use(Tooltip);
-// Vue.use(Breadcrumb);
-// Vue.use(BreadcrumbItem);
+Vue.use(Breadcrumb);
+Vue.use(BreadcrumbItem);
 // Vue.use(Form);
 // Vue.use(FormItem);
 // Vue.use(Tabs);
@@ -127,8 +127,8 @@ Vue.use(TableColumn);
 // Vue.use(Alert);
 Vue.use(Slider);
 // Vue.use(Icon);
-// Vue.use(Row);
-// Vue.use(Col);
+Vue.use(Row);
+Vue.use(Col);
 // Vue.use(Upload);
 // Vue.use(Progress);
 // Vue.use(Spinner);
@@ -144,16 +144,16 @@ Vue.use(Slider);
 // Vue.use(Cascader);
 // Vue.use(ColorPicker);
 // Vue.use(Transfer);
-// Vue.use(Container);
-// Vue.use(Header);
-// Vue.use(Aside);
-// Vue.use(Main);
-// Vue.use(Footer);
+Vue.use(Container);
+Vue.use(Header);
+Vue.use(Aside);
+Vue.use(Main);
+Vue.use(Footer);
 // Vue.use(Timeline);
 // Vue.use(TimelineItem);
 Vue.use(Link);
-// Vue.use(Divider);
-// Vue.use(Image);
+Vue.use(Divider);
+Vue.use(Image);
 // Vue.use(Calendar);
 // Vue.use(Backtop);
 // Vue.use(PageHeader);
