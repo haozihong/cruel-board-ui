@@ -68,16 +68,16 @@
       </el-table-column>
       <el-table-column
           align="center"
-          v-for="c in this.contestsShown" :key="c.id"
-          :prop="`contest${c.contestIndex}Ranking`"
-          :label="`${c.contestIndex} (${c.participantNum})`"
+          v-for="ci in contestsShowingNum < contests.length ? contestsShowingNum : contests.length" :key="ci"
+          :prop="`contest${contests[ci-1].contestIndex}Ranking`"
+          :label="`${contests[ci-1].contestIndex} (${contests[ci-1].participantNum})`"
           sortable
           width="100">
         <template v-slot="scope">
-          <div :style="`background: #${scope.row[`contest${c.contestIndex}RankingClr`]}; color: black`">
-            {{ scope.row[`contest${c.contestIndex}Ranking`] === Infinity ?
+          <div :style="`background: #${scope.row.contestRankings[ci-1].rankingClr}; color: black`">
+            {{ scope.row.contestRankings[ci-1].ranking === Infinity ?
               "N/A" :
-              `${scope.row[`contest${c.contestIndex}Ranking`]} | ${scope.row[`contest${c.contestIndex}Score`]}` }}
+              `${scope.row.contestRankings[ci-1].ranking} | ${scope.row.contestRankings[ci-1].score}` }}
           </div>
         </template>
       </el-table-column>
@@ -94,22 +94,15 @@ export default {
     return {
       refresh: 0,
       contests: [],
-      contestsShown: [],
-      contestsShowingNum: 5,
       qunyouData: []
     }
   },
-  methods: {
-    // loadMore(k) {
-    //   for (let i=this.contestsShown.length; k!==0 && i<this.contests.length; ++i, --k) {
-    //     this.contestsShown.push(this.contests[i]);
-    //   }
-    //   this.refresh ^= 1;
-    // },
-    contestsShowingNumChange() {
-      this.contestsShown = this.contests.slice(0, this.contestsShowingNum);
-      this.refresh ^= 1;
+  computed: {
+    contestsShowingNum() {
+      return this.allContestsVisible ? this.contests.length : 3;
     }
+  },
+  methods: {
   },
   mounted() {
     this.axios.get("./lc-score-board/generateEXCEL/index.xlsx", {responseType: "arraybuffer"}).then(resp => {
@@ -129,7 +122,7 @@ export default {
            ws[XLSX.utils.encode_cell({r: firstEntryRow-3, c: i})] !== undefined;
            i += 2) {
         this.contests.push({
-          id: (i-firstContextCol) / 2,
+          id: this.contests.length,
           contestIndex: ws[XLSX.utils.encode_cell({r: firstEntryRow-3, c: i})].v,
           participantNum: ws[XLSX.utils.encode_cell({r: firstEntryRow-2, c: i})].v
         });
@@ -144,29 +137,26 @@ export default {
           days: ws[`C${i+1}`].v,
           lcRating: ws[`D${i+1}`].v,
           cruelScore: ws[`E${i+1}`].v,
-          // contestRankings: []
+          contestRankings: []
         };
         for (let j=0; j<this.contests.length; ++j) {
           let ranking = ws[XLSX.utils.encode_cell({r: i, c: 5+j*2})].v,
               rankingClr = ws[XLSX.utils.encode_cell({r: i, c: 5+j*2})].s.fgColor?.rgb ?? 'EAEAEA',
               score = ws[XLSX.utils.encode_cell({r: i, c: 6+j*2})].v;
           if (ranking < 0) ranking = Infinity;
-          person[`contest${this.contests[j].contestIndex}Ranking`] = ranking;
-          person[`contest${this.contests[j].contestIndex}RankingClr`] = rankingClr;
-          person[`contest${this.contests[j].contestIndex}Score`] = score;
-          // person.contestRankings.push({
-          //   ranking: ranking,
-          //   rankingClr: rankingClr,
-          //   score: score,
-          // });
+          // person[`contest${this.contests[j].contestIndex}Ranking`] = ranking;
+          // person[`contest${this.contests[j].contestIndex}RankingClr`] = rankingClr;
+          // person[`contest${this.contests[j].contestIndex}Score`] = score;
+          person.contestRankings.push({
+            ranking: ranking,
+            rankingClr: rankingClr,
+            score: score,
+          });
         }
         this.qunyouData.push(person);
         // if (i > 25) break;
       }
       // console.log(this.qunyouData[0]);
-
-      // show 5 contests initially
-      this.contestsShown = this.contests.slice(0, this.contestsShowingNum);
     });
   }
 }
