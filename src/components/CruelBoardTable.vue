@@ -15,6 +15,7 @@
       </el-slider>
     </div>
     <el-table
+        id="boardTable"
         :data="qunyouData"
         style="width: 100%"
         stripe
@@ -166,5 +167,13 @@ export default {
 <style scoped>
 a {
   color: #42b983;
+}
+
+/* element-ui's bug */
+#boardTable >>> .el-table__header-wrapper {
+  height: 82px;
+}
+#boardTable >>> .el-table__body-wrapper {
+  height: calc(100% - 82px) !important;
 }
 </style>
