@@ -2,7 +2,6 @@
   <div>
     <div style="height: 1.8rem">
       <el-checkbox label="残酷排名" size="mini" v-model="cruelRankingColVisible"></el-checkbox>
-      <el-checkbox label="微信名" size="mini" v-model="wxNameColVisible"></el-checkbox>
       <el-checkbox label="Days" size="mini" v-model="daysColVisible"></el-checkbox>
       <el-checkbox label="工号" size="mini" v-model="workNumColVisible"></el-checkbox>
       <el-checkbox label="LC Rating" size="mini" v-model="ratingColVisible"></el-checkbox>
@@ -39,13 +38,6 @@
         <template v-slot="scope">
           <a :href="scope.row.lcLink">{{ `${scope.row.lcId}` }}</a>
         </template>
-      </el-table-column>
-      <el-table-column
-          align="center"
-          prop="wxName"
-          label="微信名"
-          width="120"
-          v-if="wxNameColVisible">
       </el-table-column>
       <el-table-column
           align="center"
@@ -117,15 +109,13 @@ export default {
   name: 'CruelBoardTable',
   data() {
     return {
-      wxNameColVisible: false,
       daysColVisible: true,
       workNumColVisible: false,
       ratingColVisible: true,
       cruelRankingColVisible: false,
       allContestsVisible: false,
       contests: [],
-      qunyouData: [],
-      nameMap: null
+      qunyouData: []
     }
   },
   computed: {
@@ -134,10 +124,6 @@ export default {
     }
   },
   methods: {
-    fillWXName() {
-      if (this.nameMap === null || this.qunyouData.length === 0 || this.qunyouData[0].wxName !== null) return;
-      this.qunyouData.forEach(person => person.wxName = this.nameMap[person.lcId]);
-    }
   },
   mounted() {
     this.axios.get("./lc-score-board/generateEXCEL/index.xlsx", {responseType: "arraybuffer"}).then(resp => {
@@ -169,7 +155,6 @@ export default {
         let person = {
           cruelRanking: ws[`A${i+1}`].v,
           lcId: ws[`B${i+1}`].v,
-          wxName: null,
           lcLink: ws[`B${i+1}`].l.Rel.Target,
           days: ws[`C${i+1}`].v,
           workNum: 0,
@@ -202,18 +187,6 @@ export default {
       for (let i=0; i<allDays.length; ++i)
         if (!(allDays[i] in daysToIdx)) daysToIdx[allDays[i]] = i + 1;
       this.qunyouData.forEach(person => person.workNum = daysToIdx[person.days]);
-
-      this.fillWXName();
-    });
-
-    this.axios.get("./lc-score-board/generateEXCEL/Data/Members/GroupRecord.xlsx", {responseType: "arraybuffer"}).then(resp => {
-      const wb = XLSX.read(new Uint8Array(resp.data), {type: 'array', cellStyles: true});
-      let ws = wb.Sheets[wb.SheetNames[0]];
-      this.nameMap = {};
-      for (let i=0; ws[XLSX.utils.encode_cell({c: 0, r: i})] !== undefined; ++i) {
-        this.nameMap[ws[`B${i+1}`].v] = ws[`A${i+1}`].v;
-      }
-      this.fillWXName();
     });
   }
 }
