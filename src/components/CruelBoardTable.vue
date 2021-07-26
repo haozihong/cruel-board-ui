@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div style="height: 1.8rem">
+    <div id="boardCheckboxGroup" style="height: 1.8rem; white-space: nowrap">
       <el-checkbox label="残酷排名" size="mini" v-model="cruelRankingColVisible"></el-checkbox>
       <el-checkbox label="Days" size="mini" v-model="daysColVisible"></el-checkbox>
       <el-checkbox label="工号" size="mini" v-model="workNumColVisible"></el-checkbox>
@@ -71,7 +71,7 @@
       <el-table-column
           align="center"
           prop="cruelScore"
-          label="Score"
+          label="滚动积分"
           width="100"
           sortable
           :sort-by="'cruelRanking'"
@@ -198,11 +198,21 @@ a {
   color: #42b983;
 }
 
+.el-checkbox {
+  margin-right: 15px;
+}
+
 /* element-ui's bug */
 #boardTable >>> .el-table__header-wrapper {
   height: 40px;
 }
 #boardTable >>> .el-table__body-wrapper {
   height: calc(100% - 40px) !important;
+}
+</style>
+
+<style>
+#boardCheckboxGroup .el-checkbox__label {
+  padding-left: 6px;
 }
 </style>
