@@ -2,6 +2,7 @@
   <div>
     <div id="boardCheckboxGroup" style="height: 1.8rem; white-space: nowrap">
       <el-checkbox label="残酷排名" size="mini" v-model="cruelRankingColVisible"></el-checkbox>
+      <!--<el-checkbox label="Company" size="mini" v-model="companyVisible"></el-checkbox>-->
       <el-checkbox label="Days" size="mini" v-model="daysColVisible"></el-checkbox>
       <el-checkbox label="工号" size="mini" v-model="workNumColVisible"></el-checkbox>
       <el-checkbox label="LC Rating" size="mini" v-model="ratingColVisible"></el-checkbox>
@@ -39,6 +40,20 @@
           <a :href="scope.row.lcLink">{{ `${scope.row.lcId}` }}</a>
         </template>
       </el-table-column>
+      <!--<el-table-column-->
+      <!--    width="40"-->
+      <!--    v-if="companyVisible"-->
+      <!--    align="center">-->
+      <!--  <template v-slot="scope">-->
+      <!--    <el-image-->
+      <!--        v-if="scope.row.company.length > 0"-->
+      <!--        style="display: flex"-->
+      <!--        :src="`https://board.cruelcoding.com/Img/${scope.row.company}.png`" -->
+      <!--        :alt="scope.row.company"-->
+      <!--        fit="contain">-->
+      <!--    </el-image>-->
+      <!--  </template>-->
+      <!--</el-table-column>-->
       <el-table-column
           align="center"
           prop="days"
@@ -109,6 +124,7 @@ export default {
   name: 'CruelBoardTable',
   data() {
     return {
+      // companyVisible: false,
       daysColVisible: false,
       workNumColVisible: false,
       ratingColVisible: true,
@@ -160,7 +176,8 @@ export default {
           workNum: 0,
           lcRating: ws[`D${i+1}`].v,
           cruelScore: ws[`E${i+1}`].v,
-          contestRankings: []
+          contestRankings: [],
+          company: ws[XLSX.utils.encode_cell({r: i, c: 5+this.contests.length*2})]?.v.slice(0, -5) ?? ''
         };
         allDays.push(person.days);
         for (let j=0; j<this.contests.length; ++j) {
