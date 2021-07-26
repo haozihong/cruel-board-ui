@@ -5,7 +5,7 @@
       <el-checkbox label="Days" size="mini" v-model="daysColVisible"></el-checkbox>
       <el-checkbox label="工号" size="mini" v-model="workNumColVisible"></el-checkbox>
       <el-checkbox label="LC Rating" size="mini" v-model="ratingColVisible"></el-checkbox>
-      <el-checkbox label="All Contests" size="mini" v-model="allContestsVisible"></el-checkbox>
+      <el-checkbox :label="`最近${this.contests.length}周周赛`" size="mini" v-model="allContestsVisible"></el-checkbox>
     </div>
     <el-table
         id="boardTable"
@@ -109,7 +109,7 @@ export default {
   name: 'CruelBoardTable',
   data() {
     return {
-      daysColVisible: true,
+      daysColVisible: false,
       workNumColVisible: false,
       ratingColVisible: true,
       cruelRankingColVisible: false,
