@@ -106,11 +106,20 @@
           </span>
         </template>
         <template v-slot="scope">
-          <div :style="`background: #${scope.row.contestRankings[ci-1].rankingClr}; color: black`">
-            {{ scope.row.contestRankings[ci-1].ranking === Infinity ?
-              "N/A" :
-              `${scope.row.contestRankings[ci-1].ranking} | ${scope.row.contestRankings[ci-1].score}` }}
-          </div>
+          <el-tooltip
+              :disabled="colorTipDisabled"
+              effect="light"
+              placement="left"
+              transition="el-fade-in"
+              :enterable="false"
+              open-delay="1000">
+            <div slot="content">深绿色 4 题<br/>鲜绿色 3 题<br/>亮黄色 2 题<br/>杏仁白 1 题</div>
+            <div :style="`background: #${scope.row.contestRankings[ci-1].rankingClr}; color: black`" @click="colorTipDisabled = !colorTipDisabled">
+              {{ scope.row.contestRankings[ci-1].ranking === Infinity ?
+                "N/A" :
+                `${scope.row.contestRankings[ci-1].ranking} | ${scope.row.contestRankings[ci-1].score}` }}
+            </div>
+          </el-tooltip>
         </template>
       </el-table-column>
     </el-table>
@@ -130,6 +139,7 @@ export default {
       ratingColVisible: true,
       cruelRankingColVisible: false,
       allContestsVisible: false,
+      colorTipDisabled: false,
       contests: [],
       qunyouData: []
     }

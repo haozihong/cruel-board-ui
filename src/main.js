@@ -32,7 +32,7 @@ import {
   // TimeSelect,
   // TimePicker,
   // Popover,
-  // Tooltip,
+  Tooltip,
   Breadcrumb,
   BreadcrumbItem,
   // Form,
@@ -115,7 +115,7 @@ Vue.use(TableColumn);
 // Vue.use(TimeSelect);
 // Vue.use(TimePicker);
 // Vue.use(Popover);
-// Vue.use(Tooltip);
+Vue.use(Tooltip);
 Vue.use(Breadcrumb);
 Vue.use(BreadcrumbItem);
 // Vue.use(Form);
