@@ -8,6 +8,7 @@
     </el-link>
 
     <div id="links">
+      <el-divider direction="vertical"></el-divider>
       <el-link :underline="false" @click="joiningInfoVisible = true">入群</el-link>
       <el-divider direction="vertical"></el-divider>
       <el-link href="https://bit.ly/2X0NW4e" target="_blank" icon="el-icon-link">每日题列表</el-link>
@@ -33,7 +34,7 @@
 
     <el-dialog title="其他链接" width="40%" :visible.sync="otherInfoVisible" center>
       <p><el-link type="primary" href="https://docs.google.com/presentation/d/11Vv8RnbGZm8hQEa9T6DhxtMtsBknI1Io0nfcFVVOYUw/" target="_blank">
-        Happy New Year! See 2020 Year-end Review!
+        Happy New Year! See 2020 Year-end Review! 残酷群2020年会
       </el-link></p>
       <p><el-link type="primary" href="https://wisdompeak.github.io/lc-score-board/cup.html" target="_blank">
         Looking for more challenges? Try Wisdom Cup!
@@ -42,10 +43,13 @@
         See where we are from
       </el-link></p>
       <p><el-link type="primary" href="https://wisdompeak.github.io/lc-score-board/sd.html" target="_blank">
-        Cruel System Design Group
+        Cruel System Design Group 残酷系统设计群
       </el-link></p>
       <p><el-link type="primary" href="https://wisdompeak.github.io/lc-score-board/graduates.html" target="_blank">
         Graduated members and archived scores
+      </el-link></p>
+      <p><el-link type="primary" href="https://faq.cruelcoding.com/" target="_blank">
+        FAQ
       </el-link></p>
     </el-dialog>
 
