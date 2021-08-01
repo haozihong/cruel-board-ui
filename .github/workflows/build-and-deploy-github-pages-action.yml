@@ -21,4 +21,4 @@ jobs:
           clean-exclude: |
             .gitmodules
             lc-score-board
-            
+            update_submodule_push.bat
