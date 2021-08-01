@@ -11,6 +11,8 @@
       <el-divider direction="vertical"></el-divider>
       <el-link :underline="false" @click="joiningInfoVisible = true">入群</el-link>
       <el-divider direction="vertical"></el-divider>
+      <el-link :underline="false" @click="rulesVisible = true">群规</el-link>
+      <el-divider direction="vertical"></el-divider>
       <el-link href="https://bit.ly/2X0NW4e" target="_blank" icon="el-icon-link">每日题列表</el-link>
       <el-divider direction="vertical"></el-divider>
       <el-link :underline="false" @click="otherInfoVisible = true">其他链接</el-link>
@@ -32,12 +34,27 @@
       </p>
     </el-dialog>
 
+    <el-dialog :visible.sync="rulesVisible" center>
+      <template slot="title">
+        <a class="el-dialog__title" href="https://wisdompeak.github.io/lc-score-board/rules.html" target="_blank">
+          <i class="el-icon-link"></i> 群规
+        </a>
+      </template>
+      <iframe src="https://wisdompeak.github.io/lc-score-board/rules.html" frameborder="0" width="100%" height="600px"></iframe>
+    </el-dialog>
+
     <el-dialog title="其他链接" width="40%" :visible.sync="otherInfoVisible" center>
+      <p><el-link type="danger" href="https://wisdompeak.github.io/lc-score-board/rules.html" target="_blank">
+        群规
+      </el-link></p>
       <p><el-link type="primary" href="https://docs.google.com/presentation/d/11Vv8RnbGZm8hQEa9T6DhxtMtsBknI1Io0nfcFVVOYUw/" target="_blank">
         Happy New Year! See 2020 Year-end Review! 残酷群2020年会
       </el-link></p>
       <p><el-link type="primary" href="https://wisdompeak.github.io/lc-score-board/cup.html" target="_blank">
         Looking for more challenges? Try Wisdom Cup!
+      </el-link></p>
+      <p><el-link type="primary" href="https://wisdompeak.github.io/lc-score-board/resources.html" target="_blank">
+        Recommended resources
       </el-link></p>
       <p><el-link type="primary" href="https://www.google.com/maps/d/viewer?mid=1c1t3qKsKxTTnDD_P2BsFsrL7p8l9Bou8" target="_blank">
         See where we are from
@@ -69,6 +86,7 @@ export default {
   data() {
     return {
       joiningInfoVisible: false,
+      rulesVisible: false,
       otherInfoVisible: false,
       curveFormVisible: false
     }
