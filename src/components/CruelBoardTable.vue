@@ -152,7 +152,14 @@ export default {
   methods: {
   },
   mounted() {
-    this.axios.get("./lc-score-board/generateEXCEL/index.xlsx", {responseType: "arraybuffer"}).then(resp => {
+    this.axios.get("./lc-score-board/generateEXCEL/index.xlsx", {
+      responseType: "arraybuffer",
+      headers: {
+        'Cache-Control': 'no-cache',
+        'Pragma': 'no-cache',
+        'Expires': '0'
+      }
+    }).then(resp => {
       let data = new Uint8Array(resp.data);
       let wb = XLSX.read(data, {type: 'array', cellStyles: true});
       let ws = wb.Sheets[wb.SheetNames[0]];
