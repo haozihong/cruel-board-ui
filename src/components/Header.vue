@@ -36,11 +36,11 @@
 
     <el-dialog :visible.sync="rulesVisible" center>
       <template slot="title">
-        <a class="el-dialog__title" href="https://wisdompeak.github.io/lc-score-board/rules.html" target="_blank">
+        <a class="el-dialog__title" href="https://board.cruelcoding.com/rules.html" target="_blank">
           <i class="el-icon-link"></i> 群规
         </a>
       </template>
-      <iframe src="https://wisdompeak.github.io/lc-score-board/rules.html" frameborder="0" width="100%" height="600px"></iframe>
+      <iframe src="https://board.cruelcoding.com/rules.html" frameborder="0" width="100%" height="600px"></iframe>
     </el-dialog>
 
     <el-dialog title="其他链接" width="40%" :visible.sync="otherInfoVisible" center>
