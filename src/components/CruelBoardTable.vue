@@ -1,12 +1,18 @@
 <template>
   <div>
-    <div id="boardCheckboxGroup" style="height: 1.8rem; white-space: nowrap">
+    <div id="boardCheckboxGroup" style="height: 2rem; white-space: nowrap">
       <el-checkbox label="残酷排名" size="mini" v-model="cruelRankingColVisible"></el-checkbox>
       <!--<el-checkbox label="Company" size="mini" v-model="companyVisible"></el-checkbox>-->
       <el-checkbox label="Days" size="mini" v-model="daysColVisible"></el-checkbox>
       <el-checkbox label="工号" size="mini" v-model="workNumColVisible"></el-checkbox>
       <el-checkbox label="LC Rating" size="mini" v-model="ratingColVisible"></el-checkbox>
-      <el-checkbox :label="`最近${this.contests.length}周周赛`" size="mini" v-model="allContestsVisible"></el-checkbox>
+      <el-checkbox size="mini" :value="true">
+        显示最近
+        <el-select v-model="contestsShowingNumRaw" allow-create filterable default-first-option size="mini" style="width: 60px">
+          <el-option v-for="item in contestsNumOptions" :key="item" :value="item"></el-option>
+        </el-select>
+        场周赛
+      </el-checkbox>
     </div>
     <el-table
         id="boardTable"
@@ -112,7 +118,7 @@
               placement="left"
               transition="el-fade-in"
               :enterable="false"
-              open-delay="1000">
+              :open-delay="1000">
             <div slot="content">深绿色 4 题<br/>鲜绿色 3 题<br/>亮黄色 2 题<br/>杏仁白 1 题</div>
             <div :style="`background: #${scope.row.contestRankings[ci-1].rankingClr}; color: black`" @click="colorTipDisabled = !colorTipDisabled">
               {{ scope.row.contestRankings[ci-1].ranking === Infinity ?
@@ -129,6 +135,9 @@
 <script>
 import XLSX from 'xlsx';
 
+const CONTESTS_SHOWING_NUM_MIN = 3;
+const CONTESTS_SHOWING_NUM_SPAN = 8;
+
 export default {
   name: 'CruelBoardTable',
   data() {
@@ -138,7 +147,7 @@ export default {
       workNumColVisible: false,
       ratingColVisible: true,
       cruelRankingColVisible: false,
-      allContestsVisible: false,
+      contestsShowingNumRaw: CONTESTS_SHOWING_NUM_MIN,
       colorTipDisabled: false,
       contests: [],
       qunyouData: []
@@ -146,7 +155,14 @@ export default {
   },
   computed: {
     contestsShowingNum() {
-      return this.allContestsVisible ? this.contests.length : 3;
+      return Math.max(CONTESTS_SHOWING_NUM_MIN, Math.min(this.contests.length, this.contestsShowingNumRaw));
+    },
+    contestsNumOptions() {
+      let options = [CONTESTS_SHOWING_NUM_MIN];
+      let div = Math.round(this.contests.length / CONTESTS_SHOWING_NUM_SPAN);
+      for (let i=1; i<=div; ++i)
+        options.push(Math.round((this.contests.length - CONTESTS_SHOWING_NUM_MIN) / div * i) + CONTESTS_SHOWING_NUM_MIN);
+      return options;
     }
   },
   methods: {
