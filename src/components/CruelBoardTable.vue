@@ -121,9 +121,13 @@
               :open-delay="1000">
             <div slot="content">深绿色 4 题<br/>鲜绿色 3 题<br/>亮黄色 2 题<br/>杏仁白 1 题</div>
             <div :style="`background: #${scope.row.contestRankings[ci-1].rankingClr}; color: black`" @click="colorTipDisabled = !colorTipDisabled">
-              {{ scope.row.contestRankings[ci-1].ranking === Infinity ?
-                "N/A" :
-                `${scope.row.contestRankings[ci-1].ranking} | ${scope.row.contestRankings[ci-1].score}` }}
+              {{
+                scope.row.contestRankings[ci-1].attendance === -2 ?
+                    "未入群" :
+                    scope.row.contestRankings[ci-1].attendance === -1 ?
+                        "缺赛" :
+                        `${scope.row.contestRankings[ci-1].ranking} | ${scope.row.contestRankings[ci-1].score}`
+              }}
             </div>
           </el-tooltip>
         </template>
@@ -217,14 +221,14 @@ export default {
           let ranking = ws[XLSX.utils.encode_cell({r: i, c: 5+j*2})].v,
               rankingClr = ws[XLSX.utils.encode_cell({r: i, c: 5+j*2})].s.fgColor?.rgb ?? 'EAEAEA',
               score = ws[XLSX.utils.encode_cell({r: i, c: 6+j*2})].v;
-          if (ranking < 0) ranking = Infinity;
-          person[`contest${this.contests[j].contestIndex}Ranking`] = ranking;
+          person[`contest${this.contests[j].contestIndex}Ranking`] = ranking < 0 ? Infinity : ranking;
           // person[`contest${this.contests[j].contestIndex}RankingClr`] = rankingClr;
           // person[`contest${this.contests[j].contestIndex}Score`] = score;
           person.contestRankings.push({
-            ranking: ranking,
+            ranking: ranking < 0 ? Infinity : ranking,
             rankingClr: rankingClr,
             score: score,
+            attendance: ranking
           });
         }
         this.qunyouData.push(person);
