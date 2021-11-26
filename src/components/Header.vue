@@ -45,28 +45,31 @@
 
     <el-dialog title="其他链接" width="40%" :visible.sync="otherInfoVisible" center>
       <p><el-link type="danger" href="https://wisdompeak.github.io/lc-score-board/rules.html" target="_blank">
-        群规
+        <i class="el-icon-link"></i> 群规
       </el-link></p>
-      <p><el-link type="primary" href="https://docs.google.com/presentation/d/11Vv8RnbGZm8hQEa9T6DhxtMtsBknI1Io0nfcFVVOYUw/" target="_blank">
-        Happy New Year! See 2020 Year-end Review! 残酷群2020年会
-      </el-link></p>
-      <p><el-link type="primary" href="https://wisdompeak.github.io/lc-score-board/cup.html" target="_blank">
-        Looking for more challenges? Try Wisdom Cup!
-      </el-link></p>
-      <p><el-link type="primary" href="https://wisdompeak.github.io/lc-score-board/resources.html" target="_blank">
-        Recommended resources
-      </el-link></p>
-      <p><el-link type="primary" href="https://www.google.com/maps/d/viewer?mid=1c1t3qKsKxTTnDD_P2BsFsrL7p8l9Bou8" target="_blank">
-        See where we are from
-      </el-link></p>
-      <p><el-link type="primary" href="https://wisdompeak.github.io/lc-score-board/sd.html" target="_blank">
-        Cruel System Design Group 残酷系统设计群
-      </el-link></p>
-      <p><el-link type="primary" href="https://wisdompeak.github.io/lc-score-board/graduates.html" target="_blank">
-        Graduated members and archived scores
+      <p><el-link type="primary" href="https://github.com/haozihong/cruel-board-ui" target="_blank">
+        <i class="el-icon-link"></i> 此榜GitHub
       </el-link></p>
       <p><el-link type="primary" href="https://faq.cruelcoding.com/" target="_blank">
-        FAQ
+        <i class="el-icon-link"></i> FAQ
+      </el-link></p>
+      <p><el-link href="https://docs.google.com/presentation/d/11Vv8RnbGZm8hQEa9T6DhxtMtsBknI1Io0nfcFVVOYUw/" target="_blank">
+        <i class="el-icon-link"></i> Happy New Year! See 2020 Year-end Review! 残酷群2020年会
+      </el-link></p>
+      <p><el-link href="https://wisdompeak.github.io/lc-score-board/cup.html" target="_blank">
+        <i class="el-icon-link"></i> Looking for more challenges? Try Wisdom Cup!
+      </el-link></p>
+      <p><el-link href="https://wisdompeak.github.io/lc-score-board/resources.html" target="_blank">
+        <i class="el-icon-link"></i> Recommended resources
+      </el-link></p>
+      <p><el-link href="https://www.google.com/maps/d/viewer?mid=1c1t3qKsKxTTnDD_P2BsFsrL7p8l9Bou8" target="_blank">
+        <i class="el-icon-link"></i> See where we are from
+      </el-link></p>
+      <p><el-link href="https://wisdompeak.github.io/lc-score-board/sd.html" target="_blank">
+        <i class="el-icon-link"></i> Cruel System Design Group 残酷系统设计群
+      </el-link></p>
+      <p><el-link href="https://wisdompeak.github.io/lc-score-board/graduates.html" target="_blank">
+        <i class="el-icon-link"></i> Graduated members and archived scores
       </el-link></p>
     </el-dialog>
 
