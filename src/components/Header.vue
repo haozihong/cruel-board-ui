@@ -53,6 +53,12 @@
       <p><el-link type="primary" href="https://faq.cruelcoding.com/" target="_blank">
         <i class="el-icon-link"></i> FAQ
       </el-link></p>
+      <p><el-link type="primary" href="http://lcpredictor.herokuapp.com/" target="_blank">
+        <i class="el-icon-link"></i> 力扣分预测 Leetcode Rating Predictor
+      </el-link></p>
+      <p><el-link type="primary" href="https://clist.by/resource/leetcode.com/" target="_blank">
+        <i class="el-icon-link"></i> CLIST力扣数据统计
+      </el-link></p>
       <p><el-link href="https://docs.google.com/presentation/d/11Vv8RnbGZm8hQEa9T6DhxtMtsBknI1Io0nfcFVVOYUw/" target="_blank">
         <i class="el-icon-link"></i> Happy New Year! See 2020 Year-end Review! 残酷群2020年会
       </el-link></p>
