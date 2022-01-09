@@ -27,6 +27,21 @@
         :default-sort = "{prop: 'cruelScore', order: 'ascending'}">
       <el-table-column
           type="index">
+        <template v-slot="scope">
+          <el-tooltip
+              :disabled="colorTipDisabled"
+              effect="light"
+              placement="left"
+              transition="el-fade-in"
+              :enterable="false"
+              :open-delay="0">
+            <div slot="content">红色 红包A组<br/>蓝色 红包B组</div>
+            <span
+                :style="`color: #${scope.row.redPacketGroup === 1 ? 'CC3333' : '3366CC'}`">
+              {{ `${scope.$index + 1}` }}
+            </span>
+          </el-tooltip>
+        </template>
       </el-table-column>
       <el-table-column
           align="center"
@@ -137,7 +152,7 @@
 </template>
 
 <script>
-import XLSX from 'xlsx';
+import XLSX from 'xlsx-style';
 
 const CONTESTS_SHOWING_NUM_MIN = 3;
 const CONTESTS_SHOWING_NUM_SPAN = 8;
@@ -214,12 +229,13 @@ export default {
           lcRating: ws[`D${i+1}`].v,
           cruelScore: ws[`E${i+1}`].v,
           contestRankings: [],
-          company: ws[XLSX.utils.encode_cell({r: i, c: 5+this.contests.length*2})]?.v.slice(0, -5) ?? ''
+          company: ws[XLSX.utils.encode_cell({r: i, c: 5+this.contests.length*2})]?.v.slice(0, -5) ?? '',
+          redPacketGroup: ws[`A${i+1}`].s.font.color ? 2 : 1  // 1: A; 2: B
         };
         allDays.push(person.days);
         for (let j=0; j<this.contests.length; ++j) {
           let ranking = ws[XLSX.utils.encode_cell({r: i, c: 5+j*2})].v,
-              rankingClr = ws[XLSX.utils.encode_cell({r: i, c: 5+j*2})].s.fgColor?.rgb ?? 'EAEAEA',
+              rankingClr = ws[XLSX.utils.encode_cell({r: i, c: 5+j*2})].s.fill?.fgColor?.rgb.slice(2) ?? 'EAEAEA',
               score = ws[XLSX.utils.encode_cell({r: i, c: 6+j*2})].v;
           person[`contest${this.contests[j].contestIndex}Ranking`] = ranking < 0 ? Infinity : ranking;
           // person[`contest${this.contests[j].contestIndex}RankingClr`] = rankingClr;
