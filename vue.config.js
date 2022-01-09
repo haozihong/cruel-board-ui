@@ -1,3 +1,8 @@
 module.exports = {
-  publicPath: './'
+  publicPath: './',
+  configureWebpack: {
+    externals: [{
+      './cptable': 'var cptable'
+    }]
+  }
 }
