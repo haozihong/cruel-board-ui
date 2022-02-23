@@ -1,14 +1,14 @@
-name: 'Auto Submodules Update - gh-pages'
+name: '[gh-pages]Auto Submodules Update Every Hour'
 
 on:
   schedule:
-  - cron: "0/5 * * * *"
+  - cron: "0 * * * *"
   # Allows you to run this workflow manually from the Actions tab or through HTTP API
   workflow_dispatch:
 
 jobs:
   sync:
-    name: 'Submodules Sync'
+    name: '[gh-pages]Auto Submodules Update Every Hour'
     runs-on: ubuntu-latest
 
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
@@ -31,8 +31,8 @@ jobs:
         git pull --recurse-submodules
         git submodule update --remote --recursive
 
-    - name: Commit update
+    - name: Commit Update
       run: |
         git config user.name 'Git bot'
         git config user.email 'bot@noreply.github.com'
-        git commit -am "Auto updated submodule references" && git push || echo "No changes to commit"
+        git commit -am "Auto updated submodule references" && git push

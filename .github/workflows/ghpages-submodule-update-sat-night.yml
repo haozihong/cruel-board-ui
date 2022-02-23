@@ -1,0 +1,32 @@
+name: '[gh-pages]Auto Submodules Update Saturday Night'
+
+on:
+  schedule:
+  - cron: "0 4 * * 0"
+  # Allows you to run this workflow manually from the Actions tab or through HTTP API
+  workflow_dispatch:
+
+jobs:
+  sync:
+    name: '[gh-pages]Auto Submodules Update Repeatedly'
+    runs-on: ubuntu-latest
+
+    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+    # Checkout the repository to the GitHub Actions runner
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        token: ${{ secrets.SUBMODULE_UPDATE_TOKEN }}
+        ref: gh-pages
+        submodules: true
+
+    - name: Git Submodule Update Repeatedly
+      run: |
+        git config user.name 'Git bot'
+        git config user.email 'bot@noreply.github.com'
+        bash tools/update_submodule_repeatedly.sh
