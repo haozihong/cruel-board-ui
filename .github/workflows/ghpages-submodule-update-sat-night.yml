@@ -1,14 +1,15 @@
-name: '[gh-pages]Auto Submodules Update Saturday Night'
+name: '[gh-pages]Submodules Update Repeatedly on Contest Day'
 
 on:
   schedule:
-  - cron: "0 4 * * 0"
+  # GitHub Action runs ~15 min later than schedule
+  - cron: "0 3 * * 0"
   # Allows you to run this workflow manually from the Actions tab or through HTTP API
   workflow_dispatch:
 
 jobs:
   sync:
-    name: '[gh-pages]Auto Submodules Update Repeatedly'
+    name: '[gh-pages]Submodules Update Repeatedly'
     runs-on: ubuntu-latest
 
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
@@ -27,6 +28,7 @@ jobs:
 
     - name: Git Submodule Update Repeatedly
       run: |
+        echo "[INFO]Now: $(date -u)"
         git config user.name 'Git bot'
         git config user.email 'bot@noreply.github.com'
         bash tools/update_submodule_repeatedly.sh
