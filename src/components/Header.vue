@@ -53,8 +53,11 @@
       <p><el-link type="primary" href="https://faq.cruelcoding.com/" target="_blank">
         <i class="el-icon-link"></i> FAQ
       </el-link></p>
+      <p><el-link type="primary" href="https://lccn.lbao.site/" target="_blank">
+        <i class="el-icon-link"></i> 力扣分预测1 Leetcode Contest Rating Predictor
+      </el-link></p>
       <p><el-link type="primary" href="https://lcpredictor.onrender.com/" target="_blank">
-        <i class="el-icon-link"></i> 力扣分预测 Leetcode Rating Predictor
+        <i class="el-icon-link"></i> 力扣分预测2 Leetcode Rating Predictor
       </el-link></p>
       <p><el-link type="primary" href="https://clist.by/resource/leetcode.com/" target="_blank">
         <i class="el-icon-link"></i> CLIST力扣数据统计
