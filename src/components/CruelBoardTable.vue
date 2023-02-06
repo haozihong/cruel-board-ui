@@ -97,6 +97,9 @@
           label="Rating"
           width="100"
           sortable
+          :sort-orders="['descending', 'ascending']"
+          :filters="[{text: '>=2100', value: '2100'}, {text: '>=2400', value: '2400'}, {text: '>=2700', value: '2700'}]"
+          :filter-method="filterLcRating"
           v-if="ratingColVisible">
         <template v-slot="scope">
           <span :style="`color: #${scope.row.lcRating >= 2100 ? 'A30000' : '0426A4'}`">
@@ -185,6 +188,9 @@ export default {
     }
   },
   methods: {
+    filterLcRating(value, row) {
+      return row.lcRating >= value;
+    }
   },
   mounted() {
     this.axios.get("./lc-score-board/generateEXCEL/index.xlsx", {
