@@ -13,9 +13,27 @@
       <el-divider direction="vertical"></el-divider>
       <el-link :underline="false" @click="rulesVisible = true">群规</el-link>
       <el-divider direction="vertical"></el-divider>
-      <el-link href="https://bit.ly/2X0NW4e" target="_blank" icon="el-icon-link">每日题列表</el-link>
+      <el-link href="https://bit.ly/2X0NW4e" target="_blank" icon="el-icon-link">每日题</el-link>
       <el-divider direction="vertical"></el-divider>
-      <el-link :underline="false" @click="otherInfoVisible = true">其他链接</el-link>
+      <el-dropdown>
+        <span class="el-dropdown-link">
+          力扣分预测<i class="el-icon-arrow-down el-icon--right"></i>
+        </span>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item>
+            <el-link :underline="false" href="https://lccn.lbao.site/" target="_blank">
+              <i class="el-icon-link"></i>网站1 <em>by baoliay2008</em>
+            </el-link>
+          </el-dropdown-item>
+          <el-dropdown-item>
+            <el-link :underline="false" href="https://lcpredictor.onrender.com/" target="_blank">
+              <i class="el-icon-link"></i>网站2 <em>by SysSn13</em>
+            </el-link>
+          </el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
+      <el-divider direction="vertical"></el-divider>
+      <el-link :underline="false" @click="otherInfoVisible = true">实用链接</el-link>
       <el-divider direction="vertical"></el-divider>
       <el-link :underline="false" @click="curveFormVisible = true">统计</el-link>
     </div>
@@ -43,24 +61,24 @@
       <iframe src="https://board.cruelcoding.com/rules.html" frameborder="0" width="100%" height="600px"></iframe>
     </el-dialog>
 
-    <el-dialog title="其他链接" width="40%" :visible.sync="otherInfoVisible" center>
-      <p><el-link type="danger" href="https://wisdompeak.github.io/lc-score-board/rules.html" target="_blank">
-        <i class="el-icon-link"></i> 群规
+    <el-dialog title="实用链接" width="40%" :visible.sync="otherInfoVisible" center>
+      <p><el-link type="danger" href="https://lccn.lbao.site/" target="_blank">
+        <i class="el-icon-link"></i> 力扣分预测 1 - Leetcode Contest Rating Predictor
       </el-link></p>
-      <p><el-link type="primary" href="https://github.com/haozihong/cruel-board-ui" target="_blank">
-        <i class="el-icon-link"></i> 此榜GitHub
-      </el-link></p>
-      <p><el-link type="primary" href="https://faq.cruelcoding.com/" target="_blank">
-        <i class="el-icon-link"></i> FAQ
-      </el-link></p>
-      <p><el-link type="primary" href="https://lccn.lbao.site/" target="_blank">
-        <i class="el-icon-link"></i> 力扣分预测1 Leetcode Contest Rating Predictor
-      </el-link></p>
-      <p><el-link type="primary" href="https://lcpredictor.onrender.com/" target="_blank">
-        <i class="el-icon-link"></i> 力扣分预测2 Leetcode Rating Predictor
+      <p><el-link type="danger" href="https://lcpredictor.onrender.com/" target="_blank">
+        <i class="el-icon-link"></i> 力扣分预测 2 - Leetcode Rating Predictor
       </el-link></p>
       <p><el-link type="primary" href="https://clist.by/resource/leetcode.com/" target="_blank">
-        <i class="el-icon-link"></i> CLIST力扣数据统计
+        <i class="el-icon-link"></i> CLIST 力扣数据统计
+      </el-link></p>
+      <p><el-link type="warning" href="https://faq.cruelcoding.com/" target="_blank">
+        <i class="el-icon-link"></i> 残酷群 FAQ
+      </el-link></p>
+      <p><el-link type="primary" href="https://github.com/haozihong/cruel-board-ui" target="_blank">
+        <i class="el-icon-link"></i> 此榜 GitHub
+      </el-link></p>
+      <p><el-link href="https://wisdompeak.github.io/lc-score-board/rules.html" target="_blank">
+        <i class="el-icon-link"></i> 群规
       </el-link></p>
       <p><el-link href="https://docs.google.com/presentation/d/1wIYIszpPuKEKTMAQXyb4lllhXApNWfa9J53lYK5gHmM/" target="_blank">
         <i class="el-icon-link"></i> Happy New Year! See 2021 Year-end Review! 残酷群2021年会
@@ -85,7 +103,12 @@
       </el-link></p>
     </el-dialog>
 
-    <el-dialog title="统计（点击看大图）" :visible.sync="curveFormVisible" center>
+    <el-dialog title="本群统计数据（点击看大图）" :visible.sync="curveFormVisible" center>
+      <el-image
+          src="https://board.cruelcoding.com/Img/Rankings.png"
+          fit="contain"
+          :preview-src-list="['https://board.cruelcoding.com/Img/Rankings.png']"
+      ></el-image>
       <el-image
           src="https://board.cruelcoding.com/Img/curve.png"
           fit="contain"
