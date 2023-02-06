@@ -27,21 +27,6 @@
         :default-sort = "{prop: 'cruelScore', order: 'ascending'}">
       <el-table-column
           type="index">
-        <template v-slot="scope">
-          <el-tooltip
-              :disabled="colorTipDisabled"
-              effect="light"
-              placement="left"
-              transition="el-fade-in"
-              :enterable="false"
-              :open-delay="0">
-            <div slot="content">红色 红包A组<br/>蓝色 红包B组</div>
-            <span
-                :style="`color: #${scope.row.redPacketGroup === 1 ? 'CC3333' : '3366CC'}`">
-              {{ `${scope.$index + 1}` }}
-            </span>
-          </el-tooltip>
-        </template>
       </el-table-column>
       <el-table-column
           align="center"
@@ -235,8 +220,7 @@ export default {
           lcRating: ws[`D${i+1}`].v,
           cruelScore: ws[`E${i+1}`].v,
           contestRankings: [],
-          company: ws[XLSX.utils.encode_cell({r: i, c: 5+this.contests.length*2})]?.v.slice(0, -5) ?? '',
-          redPacketGroup: ws[`A${i+1}`].s.font.color ? 2 : 1  // 1: A; 2: B
+          company: ws[XLSX.utils.encode_cell({r: i, c: 5+this.contests.length*2})]?.v.slice(0, -5) ?? ''
         };
         allDays.push(person.days);
         for (let j=0; j<this.contests.length; ++j) {
