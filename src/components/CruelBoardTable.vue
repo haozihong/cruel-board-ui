@@ -87,7 +87,7 @@
           :filter-method="filterLcRating"
           v-if="ratingColVisible">
         <template v-slot="scope">
-          <span :style="`color: #${scope.row.lcRating >= 2100 ? 'A30000' : '0426A4'}`">
+          <span :style="`color: #${scope.row.lcRatingClr}`">
             {{ scope.row.lcRating }}
           </span>
         </template>
@@ -218,6 +218,7 @@ export default {
           days: ws[`C${i+1}`].v,
           workNum: 0,
           lcRating: ws[`D${i+1}`].v,
+          lcRatingClr: ws[`D${i+1}`].s.font.color.rgb.slice(-6),
           cruelScore: ws[`E${i+1}`].v,
           contestRankings: [],
           company: ws[XLSX.utils.encode_cell({r: i, c: 5+this.contests.length*2})]?.v.slice(0, -5) ?? ''
